@@ -4,6 +4,7 @@ namespace DeliverIt.Data
     {
         User = 0,
         Employee = 1,
-        Owner = 2
+        Owner = 2,
+        Admin = 3
     }
 }

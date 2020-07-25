@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DeliverIt.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using GraphiQl;
 
 namespace DeliverIt
 {
@@ -26,6 +29,11 @@ namespace DeliverIt
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddDbContext<DeliverItDbContext>(context =>
+            {
+                context.UseInMemoryDatabase("OktaGraphQL");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,6 +43,8 @@ namespace DeliverIt
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseGraphiQl("/graphql");
 
             app.UseHttpsRedirection();
 
