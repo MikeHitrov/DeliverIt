@@ -32,7 +32,7 @@ namespace DeliverIt
 
             services.AddDbContext<DeliverItDbContext>(context =>
             {
-                context.UseInMemoryDatabase("OktaGraphQL");
+               
             });
         }
 
